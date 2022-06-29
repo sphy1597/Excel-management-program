@@ -6,47 +6,35 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
+import java.util.*;
 
 
 public class Operation {
  
+	static ArrayList<String> colname = new ArrayList<String>(); // 칼럼이름 저장 
+	static ArrayList<Dataform> datas = new ArrayList<Dataform>(); // 데이터폼으로 데이터 객체 저장
+	
+	static File file;
+	static FileInputStream fis;
+	static XSSFWorkbook workbook;
+	
     public static void main (String[] args) {
     	
+    	
     	try {
-    		
-    		File file = new File("data.xlsx");
-    		
-    		FileInputStream fis = new FileInputStream(file);
-    		XSSFWorkbook workbook = new XSSFWorkbook(fis);
-    		
-    		// 가로 , 세로
-    		int rowindex = 0;
-    		int colindex = 0;
-    		
-    		//시트수
-    		XSSFSheet sheet = workbook.getSheetAt(0);
-    		//행 수
-    		int rows = sheet.getPhysicalNumberOfRows();
-    		
-    		for(rowindex=1;rowindex<rows;rowindex++) {
-    			
-    			//행읽기 
-    			XSSFRow row = sheet.getRow(rowindex);
-    			XSSFCell cell = row.getCell(2);
-    			
-    			
-    			
-    			
-    		}
-    		
-    		
+    		file = new File("data.xlsx");
+			fis = new FileInputStream(file);
+			workbook = new XSSFWorkbook(fis);
+			
     	}catch(Exception e) {
-    		e.printStackTrace();
+    		e.getStackTrace();
     	}
-
+    	Readdata rd = new Readdata(file, fis, workbook);
+		
+    	rd.read();
+    	rd.printdata();
+    	
  
-        
     }
  
 }
