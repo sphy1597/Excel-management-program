@@ -11,30 +11,19 @@ import java.util.*;
 
 public class Operation {
  
-	static ArrayList<String> colname = new ArrayList<String>(); // 칼럼이름 저장 
-	static ArrayList<Dataform> datas = new ArrayList<Dataform>(); // 데이터폼으로 데이터 객체 저장
+	static DataManager dm;
 	
-	static File file;
-	static FileInputStream fis;
-	static XSSFWorkbook workbook;
 	
     public static void main (String[] args) {
     	
+    	Operation op = new Operation();
     	
-    	try {
-    		file = new File("data.xlsx");
-			fis = new FileInputStream(file);
-			workbook = new XSSFWorkbook(fis);
-			
-    	}catch(Exception e) {
-    		e.getStackTrace();
-    	}
-    	Readdata rd = new Readdata(file, fis, workbook);
-		
-    	rd.read();
-    	rd.printdata();
     	
- 
+    	dm = new DataManager();	
+    	dm.ReadData();
+    	dm.PrintData();
+    	dm.WriteData();
     }
+    
  
 }
